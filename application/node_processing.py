@@ -1,7 +1,7 @@
 from typing import List
 from domain.Node import Node
 from infrastructure.metta_reader import read_metta_file
-def change_to_nodes(file_path):
+def change_to_nodes(file_path)-> List[Node]:
     raw_nodes = read_metta_file(file_path)
     values = set()
     lis_of_nodes = []
@@ -19,7 +19,7 @@ def change_to_nodes(file_path):
             node[temp_list[0]] = temp_list[-1]
     lis_of_nodes.pop(0)
     return lis_of_nodes
-def change_to_node_from_mult_files(*paths):
+def change_to_node_from_mult_files(*paths)->List[Node]:
     nodes = []
     for i in paths:
         nodes.extend(change_to_nodes(i))
