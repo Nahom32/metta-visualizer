@@ -9,11 +9,11 @@ def change_to_nodes(file_path):
     for i in raw_nodes:
         temp_list = i.strip()[1:-1].split()
         if len(temp_list) == 2 and temp_list[1] not in values:
+            node['typeData'] = temp_list[0]
             lis_of_nodes.append(Node(**node))
             node = {}
             values.add(temp_list[1])
         elif len(temp_list) > 2:
-            print(temp_list[-1][0])
             if type(temp_list[-1]) == str and temp_list[-1][0]=="\"" and temp_list[-1][-1] == "\"":
                 temp_list[-1] = temp_list[-1][1:-1]   
             node[temp_list[0]] = temp_list[-1]
