@@ -19,6 +19,13 @@ def change_to_nodes(file_path):
             node[temp_list[0]] = temp_list[-1]
     lis_of_nodes.pop(0)
     return lis_of_nodes
+def change_to_node_from_mult_files(*paths):
+    nodes = []
+    for i in paths:
+        nodes.extend(change_to_nodes(i))
+    return nodes
+
+    
             
         
             
