@@ -1,5 +1,6 @@
-from infrastructure.metta_reader import read_metta_file
 
-value = read_metta_file("test_files/compound_nodes.metta")
+from application.node_processing import change_to_nodes
+
+value = change_to_nodes("test_files/compound_nodes.metta")
 for i in value:
-    print(i.strip())
+    print(i)
