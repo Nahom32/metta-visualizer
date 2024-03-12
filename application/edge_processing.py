@@ -8,15 +8,23 @@ def process_edges(edge_path: str, nodes: List[Node],descriptors: List[Edge],id: 
     list_of_edges = []
     for i in edges_raw:
         temp_edge = i.strip()[1:-1].split()
-        if len(temp_edge) == 5:
-            list_of_edges.append(Edge(**edge))
-            edge = {}
-            node_1 = {}
-            node_2 = {}
-        elif len(temp_edge) == 7:
+        if len(temp_edge) == 7:
             for j in nodes:
-                if j[id] == temp_edge[3][-1]:
-                    pass
+                if j.props[id] == temp_edge[3][:-1]:
+                    edge['node'] = j
+                    for k in descriptors:
+                        if k.props[id] == temp_edge[5][:-2]:
+                            edge['descriptor'] = k
+                            edge['value'] = temp_edge[-1][:-1]
+                            break
+                    list_of_edges.append(Edge(**edge))
+                    edge = {}
+                    
+    return list_of_edges
+
+                
+                            
+                        
                     
                     
             
