@@ -14,6 +14,4 @@ draw_graph(graph)
 
 
 
-for i in edges:
-    print(i)
-    
+
