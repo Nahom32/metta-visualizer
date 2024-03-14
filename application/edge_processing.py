@@ -4,7 +4,7 @@ from domain.Edge import Edge
 from infrastructure.metta_reader import read_metta_file
 def process_edges(edge_path: str, nodes: List[Node],descriptors: List[Edge],id: str) -> List[Edge]:
     edges_raw = read_metta_file(edge_path)
-    print(edges_raw)
+    print(nodes)
     edges_raw.pop()
     edge = {}
     list_of_edges = []
@@ -16,6 +16,8 @@ def process_edges(edge_path: str, nodes: List[Node],descriptors: List[Edge],id: 
                 if j.props[id] == temp_edge[3][:-1]:
                     for k in descriptors:
                         if k.props[id] == temp_edge[5][:-2]:
+                            print(j)
+                            print(k)
                             edge['node'] = j
                             edge['descriptor'] = k
                             edge['value'] = temp_edge[-1][:-1]
