@@ -1,0 +1,33 @@
+swagger: "2.0"
+info:
+  title: "Get Connections API"
+  description: "An API for retrieving connections between nodes"
+  version: "1.0"
+paths:
+  /getconn:
+    get:
+      summary: "Get Connections"
+      description: "Returns connections between nodes"
+      parameters:
+        - name: id
+          in: query
+          description: "Identifier for the node"
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Successful response"
+          schema:
+            type: "array"
+            items:
+              type: "object"
+              properties:
+                source:
+                  type: "string"
+                  description: "Source node ID"
+                target:
+                  type: "string"
+                  description: "Target node ID"
+                weight:
+                  type: "number"
+                  description: "Weight of the connection"
