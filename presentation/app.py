@@ -25,11 +25,16 @@ class NodeSchema(Schema):
     props = fields.Dict()
 
 class EdgeSchema(Schema):
-    nodes = fields.Method("serialize_nodes")  # Method field for serializing nodes
+    nodes = fields.Method("serialize_nodes")
     edges = fields.Dict()
 
     def serialize_nodes(self, obj):
-        return [node.to_dict() for node in obj.nodes]  # Serialize each node in the list
+        nodes = []
+        edge_dict = obj.to_dict()
+        for i in edge_dict:
+            if isinstance(i,Node):
+                nodes.append(i.to_dict())
+        return nodes 
 
 @app.route("/getconn", methods=["GET"])
 def index():
