@@ -19,25 +19,18 @@ swaggerui_blueprint = get_swaggerui_blueprint(
 )
 
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
-class NodeSchema(Schema):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for attr in Node().__dict__.keys():
-            setattr(self, attr, fields.Raw())
+
 
 class NodeSchema(Schema):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for attr in Node().__dict__.keys():
-            setattr(self, attr, fields.Raw())
+    props = fields.Dict()
 
 class EdgeSchema(Schema):
-    node = fields.Nested(NodeSchema)
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for attr in Edge().__dict__.keys():
-            if attr != 'node':  
-                setattr(self, attr, fields.Raw())
+    nodes = fields.Method("serialize_nodes")  # Method field for serializing nodes
+    edges = fields.Dict()
+
+    def serialize_nodes(self, obj):
+        return [node.to_dict() for node in obj.nodes]  # Serialize each node in the list
+
 @app.route("/getconn", methods=["GET"])
 def index():
     nodes = change_to_node_from_mult_files("../test_files/compound_nodes.metta")

@@ -7,5 +7,7 @@ class Node:
         return f'{self.props}'
     def get_prop(self,prop_name):
         return self.props[prop_name]
+    def to_dict(self):
+        return self.props
 
         

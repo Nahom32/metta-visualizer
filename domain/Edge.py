@@ -5,4 +5,5 @@ class Edge:
         return f'{self.edges}'
     def __str__(self):
         return f'{self.edges}'
-    
+    def to_dict(self):
+        return self.edges
